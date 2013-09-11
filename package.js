@@ -51,7 +51,8 @@ Package.register_extension(
     // Read the file content and create JSON
     try{
       // Create the string scanner with the .jade file content
-      var ss = new StringScanner(fs.readFileSync(source_path, "utf8"));
+      // newlines fix `Cannot read property 'length' of undefined`
+      var ss = new StringScanner(fs.readFileSync(source_path, "utf8") + "\n\n");
       ss.reset();
       // Parse the file content until the end
       while(!ss.endOfString()){
